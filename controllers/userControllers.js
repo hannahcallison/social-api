@@ -1,11 +1,13 @@
 const User = require('../models/User');
 
 module.exports = {
+  // get all users
   getUsers(req, res) {
     User.find()
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
+  // get one user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
@@ -22,7 +24,7 @@ module.exports = {
       .then((UserData) => res.json(UserData))
       .catch((err) => res.status(500).json(err));
   },
-
+  // update single user
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -39,32 +41,21 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-
-
-//   deleteUser(req, res) {
-//     User.findOneAndRemove({ _id: req.params.userId })
-//       .then((user) =>
-//         !user
-//           ? res.status(404).json({ message: 'No user with this id!' })
-//           : User.deleteMany(
-//               { users: req.params.userId },
-//               { $pull: { users: req.params.userId } },
-//               { new: true }
-//             )
-//       )
-//       .then((user) =>
-//         !user
-//           ? res
-//               .status(404)
-//               .json({ message: 'user created but no user with this id!' })
-//           : res.json({ message: 'Video successfully deleted!' })
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
-
-
-  // Add a video response
-    addUserFriend(req, res) {
+  // delete a user
+  deleteUser(req, res) {
+    User.findOneAndRemove({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with this id!' })
+          : res.json(user)
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+  // add a friend
+  addUserFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $addToSet: { friend: req.body.friendId } },
@@ -77,11 +68,11 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove video response
+  // remove a friend
   removeUserFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friend: req.params.friendId } },
+      { $pull: { friend: req.params.friendId } }, 
       { runValidators: true, new: true }
     )
       .then((user) =>
