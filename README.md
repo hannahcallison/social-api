@@ -23,12 +23,16 @@ Express
 
 ## Screenshots
 
-![Screenshot1]()
+![Screenshot1](./assets/Screen%20Shot%202022-05-24%20at%209.19.25%20PM.png)
 
-![Screenshot2]()
+![Screenshot2](./assets/Screen%20Shot%202022-05-24%20at%209.19.32%20PM.png)
+
+![Screenshot3](./assets/Screen%20Shot%202022-05-24%20at%209.19.40%20PM.png)
+
+![Screenshot4](./assets/Screen%20Shot%202022-05-24%20at%209.19.46%20PM.png)
 
 ## Usage 
-[Youtube Walkthrough Link](https://ancient-depths-34538.herokuapp.com/)
+[Youtube Walkthrough Link](https://youtu.be/YH8zuV5AU6U)
 
 ## License 
 
